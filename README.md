@@ -16,11 +16,11 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 
 ### Instruções para rodar o servidor
 
-Alterar o arquivo conexaoBd com os seus dados de
--host
--user
--password
--database
+Alterar o arquivo conexaoBd com os seus dados de:
+host
+user
+password
+database
 
 No terminal de comando
 npm install
