@@ -13,3 +13,15 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 - [x] Colocar mais dados para a variedade de jogos 
 - [ ] Arrumar arquivos de acordo com a metodologia BEM
 - [ ] Interação da página inicial
+
+### Instruções para rodar o servidor
+
+Alterar o arquivo conexaoBd com os seus dados de
+-host
+-user
+-password
+-database
+
+No terminal de comando
+npm install
+nodemon servidor.js
