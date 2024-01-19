@@ -30,6 +30,10 @@ Alterar o arquivo conexaoBd com os seus dados de:
 
 No terminal de comando executar:
 
-npm install
+- npm install
 
-nodemon servidor.js
+- nodemon servidor.js
+
+No navegador abrir o site em:
+
+- http://localhost:3000/
