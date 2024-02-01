@@ -9,13 +9,11 @@ export default class LoginModal {
 
   checkAndShowModal() {
     const nomeDoCookie = this.getCookie('cookiedLogin');
-    console.log(nomeDoCookie); 
     if (!nomeDoCookie) {
        // O cookie não existe, então exiba o modal
       this.showModal();
     } else {
         this.close();
-        //atualizarSaldo();
       }
   }
 
@@ -43,18 +41,18 @@ export default class LoginModal {
   performLogin() {
     
     const email = document.getElementById('loginEmail').value;
-    const senha = document.getElementById('loginPassword').value;
+    const passworld = document.getElementById('loginPassword').value;
 
-    if (email.length<1 || senha.length<1) {
+    if (email.length<1 || passworld.length<1) {
       alert("Por favor, preencha todos os campos.");
       return;
   }
     var login = {   
       email: email,
-      senha: senha
+      passworld: passworld
   };
-  
-  var minhaRequisicao = new Request("http://localhost:3000/login");
+  console.log("enviado :"+login);
+  var minhaRequisicao = new Request("/login");
   fetch(minhaRequisicao,{
     method: "POST",
     headers:{
@@ -66,7 +64,6 @@ export default class LoginModal {
     if (response.status === 200) {
         this.close(); // Chama a função close() se a resposta for 200
         document.cookie = `cookiedLogin=${email}`;
-        //atualizarSaldo();
         window.location.reload();
     }
     return response.text();
@@ -86,23 +83,23 @@ export default class LoginModal {
       alert("Por favor, preencha todos os campos.");
       return;
   }
-    var usuario = {
-        primeiroNome: firstName,
-        sobrenome: lastName,
+    var user = {
+        firstName: firstName,
+        lastName: lastName,
         email: email,
-        apelido: nickname,
+        userName: nickname,
         cpf: cpf,
-        senha: password,
-        dataNascimento: dob
+        passworld: password,
+        dateOfBirth: dob
     };
-var minhaRequisicao = new Request("http://localhost:3000/usuario");
+var minhaRequisicao = new Request("/user");
 fetch(minhaRequisicao,{
 method: "POST",
 headers:{
   Accept: "application/json",
   "Content-Type" : "application/json"
 },
-body: JSON.stringify(usuario)
+body: JSON.stringify(user)
 }).then(response => response.text()).then(responseText => {
 alert("Resposta do back-end: " + responseText);
 })        
@@ -124,30 +121,4 @@ alert("Resposta do back-end: " + responseText);
   }
 }
 
-/*function getSaldoUsuario() {
-  var minhaRequisicao = new Request("http://localhost:3000/saldo");
-
-  return fetch(minhaRequisicao, {
-      method: "GET",
-      headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-      },
-  }).then(response => {
-      if (response.status === 200) {
-          return response.json(); // Retorna a resposta do servidor
-      } else {
-          throw new Error("Erro ao obter o saldo do usuário");
-      }
-  });
-}
-
-function atualizarSaldo() {
-  getSaldoUsuario().then(data => {
-      console.log("atualizar saldo teste: " + data);
-      document.getElementById("saldo").innerText = data;
-  }).catch(error => {
-      console.error("Erro ao obter o saldo do usuário:", error);
-  });
-}*/
 

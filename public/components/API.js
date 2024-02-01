@@ -3,7 +3,7 @@ export default class Api {
 
 
     async getSaldoUsuario() {
-    var minhaRequisicao = new Request("http://localhost:3000/saldo");
+    var minhaRequisicao = new Request("/wallet");
 
     const response = await fetch(minhaRequisicao, {
       method: "GET",
@@ -15,22 +15,21 @@ export default class Api {
     if (response.status === 200) {
       return response.json(); // Retorna a resposta do servidor
     } else {
-      throw new Error("Erro ao obter o saldo do usuário");
+      throw new Error("Erro ao obter o wallet do usuário");
     }
   }
 
-  atualizarSaldo() {
+  loadWallet() {
         this.getSaldoUsuario().then(data => {
-        console.log("atualizar saldo teste: " + data);
-        document.getElementById("saldo").innerText = data;
+        document.getElementById("wallet").innerText = data;
     }).catch(error => {
-        console.error("Erro ao obter o saldo do usuário:", error);
+        console.error("Erro ao obter o wallet do usuário:", error);
     });
   }
 
   async getDadosUsuario() {
     try {
-      var minhaRequisicao = new Request("http://localhost:3000/usuario");
+      var minhaRequisicao = new Request("/user");
 
       const response = await fetch(minhaRequisicao, {
         method: "GET",
@@ -53,14 +52,12 @@ export default class Api {
     }
   }
 
-  async addSaldo (valorDeposito) {
-    console.log(valorDeposito);
-    console.log(typeof valorDeposito);
+  async updateWallet (depositAmount) {
       var deposito = {   
-        valor: valorDeposito
+        value: depositAmount
     };
     try {
-    var minhaRequisicao = new Request("http://localhost:3000/usuario/addSaldo");
+    var minhaRequisicao = new Request("/user/updateWallet");
       const response = await fetch(minhaRequisicao,{
         method: "PUT",
         headers:{
@@ -70,7 +67,8 @@ export default class Api {
         body: JSON.stringify(deposito)
       }); 
         if (response.status === 200) {
-       window.location.reload();
+          
+        window.location.reload();
         }
         return response.text();
       
@@ -80,17 +78,17 @@ export default class Api {
     }
   }
 
-  async apostar (aposta) {
+  async bet (bet) {
      
     try {
-    var minhaRequisicao = new Request("http://localhost:3000/apostar");
+    var minhaRequisicao = new Request("/bet");
       const response = await fetch(minhaRequisicao,{
         method: "POST",
         headers:{
             Accept: "application/json",
             "Content-Type" : "application/json"
         },
-        body: JSON.stringify(aposta)
+        body: JSON.stringify(bet)
       }); 
         if (response.status === 200) {
       window.location.reload();

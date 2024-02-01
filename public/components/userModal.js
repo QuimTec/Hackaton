@@ -1,10 +1,10 @@
-import DepositModal from '../components/depositoModal.js';
+import DepositModal from './depositModal.js';
 
 export default class UserModal {
   constructor() {
     this.modal = document.getElementById('modalUser');
     this.profileBtn = document.getElementById('profileBtn');
-    this.depositBtn = document.querySelector('.button__depositar');
+    this.depositBtn = document.querySelector('.button__deposit');
     this.closeButton = document.querySelector('.close_user');
     this.depositModal = new DepositModal;
 
@@ -46,24 +46,18 @@ export default class UserModal {
     });
   }
 
-   updateUserModal(userData) {
-    // Lógica para carregar dados do usuário no modal
-    // ...
-    console.log(userData);
-    var apelidoInput = document.getElementById('apelido');
+  updateUserModal(userData) {
+
+    var userNameInput = document.getElementById('userName');
     var cpfInput = document.getElementById('cpfModal');
-    var saldoInput = document.getElementById('saldoModal');
-    var pontosInput = document.getElementById('pontos');
-    // ...
-
-    // Simular dados do usuário (substitua com os dados reais do usuário)
+    var walletInput = document.getElementById('walletModal');
+    var pointsInput = document.getElementById('points');
   
-
-    // Preencher os campos do modal do usuário
-    apelidoInput.value = userData.apelido;
+    userNameInput.value = userData.userName;
     cpfInput.value = userData.cpf;
-    saldoInput.value = userData.saldo;
-    pontosInput.value = userData.pontos;
-    // Outros campos do modal podem ser preenchidos da mesma maneira
+    walletInput.value = userData.wallet;
+    pointsInput.value = userData.points;
+   
   }
+
 }

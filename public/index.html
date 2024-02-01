@@ -14,7 +14,7 @@
           <img src="./images/Logo__GlascBet.png" alt="Logo GlascBet" />
         </div>
         <div class="nav-elements">
-          <button class="button__money" id="moneyBtn">R$ <span id="saldo"></span></button>
+          <button class="button__money" id="moneyBtn">R$ <span id="wallet"></span></button>
           <button class="button__profile" id="profileBtn">
             <img src="./images/UserImage.png" alt="Perfil" />
           </button>
@@ -23,10 +23,10 @@
       <!--main-section-->
      <div class="main-section">
       <!--Title-->
-      <h2 class="main__title">Apostas</h2>
+      <h2 class="main__title">Bets</h2>
       <!--Grid-->
       <!-- Container onde os cards serão adicionados -->
-      <div id="apostas-container" class="apostas">
+      <div id="bets-container" class="bets">
         <!-- Os cards serão adicionados aqui dinamicamente -->
       </div>
 
@@ -41,20 +41,20 @@
               type="text"
               id="firstName"
               name="firstName"
-              placeholder="Primeiro nome"
+              placeholder="First Name"
             />
             <input
               type="text"
               id="lastName"
               name="lastName"
-              placeholder="Sobrenome"
+              placeholder="Last Name"
               required
             />
             <input
               type="text"
               id="nickname"
               name="nickname"
-              placeholder="Apelido"
+              placeholder="Username"
               required
             />
             <input
@@ -68,14 +68,14 @@
               type="password"
               id="password"
               name="password"
-              placeholder="Senha"
+              placeholder="Password"
               required
             />
             <input
               type="date"
               id="dob"
               name="dob"
-              placeholder="Data de Nascimento"
+              placeholder="Date of Birth"
               required
             />
             <input
@@ -94,14 +94,14 @@
               type="email"
               id="loginEmail"
               name="loginEmail"
-              placeholder="E-mail cadastrado"
+              placeholder="E-mail"
               required
             />
             <input
               type="password"
               id="loginPassword"
               name="loginPassword"
-              placeholder="Senha"
+              placeholder="Password"
               required
             />
 
@@ -110,31 +110,29 @@
         </div>
       </div>
 
-      <!-- Modal de Aposta -->
-      <div id="modalAposta" class="modal modal_aposta">
-        <div class="modal-aposta-content">
+      <!-- Modal de Bet -->
+      <div id="modalBet" class="modal modal_bet">
+        <div class="modal-content">
           <span class="close">&times;</span>
-          <h2 class="modal-title">Apostar</h2>
-          <p class="aposta__type"></p>
-          <p class="aposta__league"></p>
-          <form class="aposta__form">
-            <label for="quantia">Quantia</label>
-            <input
-              type="number"
-              class="quantia"
-              id="quantia"
-              placeholder="Digite a quantia"
-              max="10000"
-              required
-            />
-            <label for="ganho">Ganhos</label>
-            <input type="number" class="ganho" id="ganho" readonly />
+          <h2 class="modal-title">Bet</h2>
+          <p class="bet__type"></p>
+          <p class="bet__league"></p>
+          <form class="bet__form">
+            <label for="amount">Value da Aposta</label>
+            <div >
+              <span class="currency-symbol">R$</span>
+              <input type="number" class="amount" id="amount" placeholder="Digite o valor" max="10000" required>
+            </div>
+            <label for="earning">Earnings</label>
+            <div >
+              <span>$</span>
+              <input type="number" class="earning" id="earning" readonly />
+            </div>
           </form>
           <div class="buttons">
-            <button class="button" id="confirmarAposta">
-              Confirmar Aposta
+            <button class="button" id="confirmarBet">
+              Confirmar Bet
             </button>
-            <button class="button" id="depositar">Depositar Dinheiro</button>
           </div>
         </div>
       </div>
@@ -149,12 +147,12 @@
             class="userImage"
           />
           <form class="user__form">
-            <div>Apelido</div>
+            <div>Username</div>
             <input
               type="text"
-              class="apelido"
-              id="apelido"
-              placeholder="Apelido"
+              class="userName"
+              id="userName"
+              placeholder="Username"
               required
             />
             <div>CPF</div>
@@ -168,24 +166,24 @@
             <div>Saldo (R$)</div>
             <input
               type="number"
-              class="saldo"
-              id="saldoModal"
-              placeholder="Saldo Total"
+              class="wallet"
+              id="walletModal"
+              placeholder="Total Money"
               readonly
             />
             <div>Pontos</div>
             <input
               type="number"
-              class="pontos"
-              id="pontos"
-              placeholder="Total acumulado"
+              class="points"
+              id="points"
+              placeholder="Total"
               readonly
             />
             <input
               type="text"
               class="skins"
               list="skins"
-              placeholder="Escolha sua skin"
+              placeholder="Chose your skin"
             />
             <datalist id="skins">
               <option value="Ahri">Florescer Espiritual - Ahri</option>
@@ -198,35 +196,33 @@
               <option value="Riven">Emissários da Luz - Riven</option>
             </datalist>
           </form>
-          <button class="button button__depositar">Depositar</button>
-          <button class="button button__retirar">Retirar $</button>
+          <button class="button button__deposit">Deposit</button>
+          <button class="button button__retirar">Cash Out $</button>
           <button class="button button__solicitar" disabled>
             Solicitar Skin
           </button>
           <p class="aviso">
-            Solicite uma skin a partir de 500 pontos acumulados (Max. 5000)
+            Request a skin from min. 500 points (Max. 5000)
           </p>
         </div>
       </div>
 
       <!--Adicionei o modal depósito *Marina-->
       <div id="depositModal" class="modal_deposito">
-        <div class="modal-deposito-content">
+        <div class="modal-deposit-content">
           <span class="close" id="closeModalBtn">&times;</span>
-          <h2>Depositar</h2>
+          <h2>Deposit</h2>
           <form id="depositForm">
-            <label for="valorDeposito">Valor:</label>
-            <input type="text" id="valorDeposito" name="valorDeposito" required>
+            <label for="depositAmount">Value:</label>
+            <input type="text" id="depositAmount" name="depositAmount" required>
 
-            <label for="paymentMethod">Forma de Pagamento:</label>
+            <label for="paymentMethod">Payment Method:</label>
             <select id="paymentMethod" name="paymentMethod" required>
-              <option value="creditCard">Cartão de Crédito</option>
-              <option value="debitCard">Cartão de Débito</option>
-              <option value="bankTransfer">Transferência Bancária</option>
+              <option value="creditCard">Credit Card</option>
             </select>
 
             <button type="button" id="confirmDepositBtn">
-              Confirmar Depósito
+              Confirm Deposit
             </button>
           </form>
         </div>
