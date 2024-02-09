@@ -21,7 +21,7 @@ export default class Api {
 
   loadWallet() {
         this.getSaldoUsuario().then(data => {
-        document.getElementById("wallet").innerText = data;
+        document.getElementById("wallet-value").innerText = data;
     }).catch(error => {
         console.error("Erro ao obter o wallet do usuário:", error);
     });
@@ -67,8 +67,7 @@ export default class Api {
         body: JSON.stringify(deposito)
       }); 
         if (response.status === 200) {
-          
-        window.location.reload();
+          window.location.reload();
         }
         return response.text();
       

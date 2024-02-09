@@ -18,7 +18,7 @@ export default class UserModal {
 
   async open() {
     this.modal.style.display = 'flex';
-    // Adicione aqui a lógica para carregar os dados do usuário no modal
+
     this.userData = await this.api.getDadosUsuario();
     if (this.userData) {
       this.updateUserModal(this.userData);
@@ -32,16 +32,17 @@ export default class UserModal {
   setupEventListeners() {
     this.profileBtn.addEventListener('click', () => this.open());
     this.closeButton.addEventListener('click', () => this.close());
-    this.depositBtn.addEventListener('click', () => {
+    this.depositBtn.addEventListener('click', (clickEvent) => {
+      clickEvent.preventDefault();
       this.close();
       this.depositModal.open();
     });
 
-    // Adicionar evento para fechar o modal do usuário ao pressionar a tecla "Esc"
+  
     window.addEventListener('keydown', (event) => {
       if (event.key === 'Escape') {
         this.close();
-        depositModal.close();
+        this.depositModal.close();
       }
     });
   }

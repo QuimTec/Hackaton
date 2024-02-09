@@ -3,7 +3,7 @@ import UserModal from '../components/userModal.js';
 import DepositModal from '../components/depositModal.js';
 import BetModal from '../components/betModal.js';
 import Api from '../components/API.js';
-import { arrayData } from "../components/array-data.js";
+import { arrayData } from "../components/mockMatchData.js";
 
 document.addEventListener('DOMContentLoaded', () => {
   const loginModal = new LoginModal();  
@@ -15,20 +15,19 @@ document.addEventListener('DOMContentLoaded', () => {
   userModal.setApi(api);
   
   loginModal.checkAndShowModal();
+  loginModal.switchPage('login-form');
   
   api.loadWallet();
  
 
   betBtns.forEach((btn) => {
-    btn.addEventListener('click', (event) => {
-      
+    btn.addEventListener('click', (event) => {      
         const betModal = new BetModal();
         const league = event.currentTarget.dataset.league;
         const teamname = event.currentTarget.dataset.teamname;
         const winPercentage = event.currentTarget.dataset.winPercentage;
         const wins = event.currentTarget.dataset.wins;
-        const totalGames = event.currentTarget.dataset.totalGames;
-   
+        const totalGames = event.currentTarget.dataset.totalGames;   
         betModal.open(league, teamname, winPercentage, wins, totalGames,matchDay);
     });
 });
@@ -53,11 +52,10 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
       userModal.close();
-      depositModal.close();
-      betModal.close();
     }
   });
 });
+
 
 function createBetCard(dataTeam1, dataTeam2,matchDay) {
   
@@ -69,27 +67,24 @@ function createBetCard(dataTeam1, dataTeam2,matchDay) {
   return `
     <div class="bet-card">
     
-      <div class="bet-info">
-        <p class="bet__type">Vencedor da Partida</p>
-        
-        <p class="bet__league">${dataTeam1.league}</p>
-      </div>
-      <p class="bet__date">${matchDay}</p>
+        <p class="bet-info bet__type">Vencedor da Partida</p>        
+        <p class="bet-info bet__league">${dataTeam1.league}</p>
+      
       <div class="bet-options">
-        <button class="time-btn" data-teamname="${dataTeam1.teamname}" data-win-percentage="${dataTeam1.win_percentage}" data-wins="${dataTeam1.wins}" data-total-games="${dataTeam1.total_games}">
-          <div>
-            ${dataTeam1.teamname} <span class="bet__win-percentage">Odds ${dataTeam1.win_percentage.toFixed(2)}</span>
-          </div>
-        
+        <button class="time-btn" data-teamname="${dataTeam1.teamname}" data-win-percentage="${dataTeam1.win_percentage}" data-wins="${dataTeam1.wins}" data-total-games="${dataTeam1.total_games}" data-league="${dataTeam1.league}">  
+          <img id="team-logo" src="./images/Ellipse 347.svg" alt="Team logo">      
+          <div id="team-margin">${dataTeam1.teamname}</div>
+          <div>${dataTeam1.win_percentage.toFixed(2)}</div>          
         </button>
+      </div> 
         <div class="vs">   
         VS
         </div>
-        <button class="time-btn" data-teamname="${dataTeam2.teamname}" data-win-percentage="${dataTeam2.win_percentage}" data-wins="${dataTeam2.wins}" data-total-games="${dataTeam2.total_games}">
-          <div>
-            ${dataTeam2.teamname} <span class="bet__win-percentage">Odds ${dataTeam2.win_percentage.toFixed(2)}</span>
-          </div>
-        
+      <div class="bet-options">
+        <button class="time-btn" data-teamname="${dataTeam2.teamname}" data-win-percentage="${dataTeam2.win_percentage}" data-wins="${dataTeam2.wins}" data-total-games="${dataTeam2.total_games}" data-league="${dataTeam2.league}">       
+        <div>${dataTeam2.win_percentage.toFixed(2)}</div>  
+        <div id="team-margin">${dataTeam2.teamname}</div>             
+        <img id="team-logo" src="./images/Ellipse 347.svg" alt="Team logo">  
         </button>
       </div>
     </div>
@@ -128,3 +123,28 @@ for (let i = 0; i < arrayData.length; i += 2) {
   const matchDayFormatado = matchDayDate.toLocaleDateString();
   betsContainer.innerHTML += createBetCard(dataTeam1, dataTeam2, matchDayFormatado);
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+  const buttons = document.querySelectorAll('.time-btn');
+  let changeColor = false;
+    buttons.forEach((button, index) => {
+      if(index % 2 === 0) {
+        changeColor = !changeColor;
+      }
+      if (index % 2 === 0 && changeColor) {
+        button.classList.add('team1-btn');
+      } 
+      if (index % 2 !== 0 && changeColor) {
+        button.classList.add('team2-btn');
+      }
+      if (index % 2 === 0 && !changeColor) {
+        button.classList.add('team2-btn');
+      } 
+      if (index % 2 !== 0 && !changeColor) {24242
+        button.classList.add('team1-btn');
+        
+      }
+    });  
+});
+
+

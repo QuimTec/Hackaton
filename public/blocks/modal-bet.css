@@ -1,126 +1,92 @@
-  
-
-  
-  .bet-card {
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
-    padding: 50px 100px;
-    margin-bottom: 20px;
-    box-sizing: border-box;
+#bet-mod-margin{
     display: flex;
     justify-content: space-between;
-  }
-  
-  .bet__type {
+    align-items: center;
+    padding: 5px;
+    padding-inline: 10px;
+}
+
+#bet__type{
+    font-size: 15px;
+    text-transform: none;
     color: #0397AB;
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-  
-  .bet__form {
-    display: grid;
-    grid-column: 1;
-    gap: 15px;
-    margin-bottom: 55px;
-  }
-  
-  .bet__league {
-    margin: 0;
-    color: #F7F7F7;
-    font-size: 18px;
-    margin-bottom: 8px;
-    margin-left: 90px;
-  }
+}
 
-  .bet__date {
-    font-weight: bold; 
-    font-size: 16px;  
-    margin: 0;         
-    text-align: center; 
-    justify-content: center; 
-    align-items: center; 
-  }
-  
-  .bet-info {
+#winPercentage{
+    font-size: 15px;
+    text-transform: none;
+    color: #0397AB;
+}
+
+#teamname{
+    font-size: 15px;
+    text-transform: none;
+}
+
+#bet__league{
+    font-size: 15px;
+    text-transform: none;
+}
+
+.bet-modal{
+    left: 70%;
+    box-shadow: none;
+    top:45%;
+    width: max-content;
+}
+
+.modal-bet-content{
+    font-size: 20px;
+    font-weight: 900;
+    text-transform: uppercase;
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
-    margin: 0;
-    align-items: flex-end;
-  }
-  
-  .bet-options {
-    display: flex;
-    flex-direction: row;
-    margin-top: 10px;
-    align-items: flex-end;
-  }
-  
-  .time-btn {
-    background-color: transparent;
-    border: none;
-    box-shadow: 0 0 10px 5px rgba(133, 151, 153, 0.5);
-    border-radius: 10px;
-    cursor: pointer;
-    padding: 10px 20px;
-    margin-top: 5px;
-    color: #F7F7F7;
-    font-size: 20px;
-    font-weight: 700;
-    box-sizing: border-box;
-  }
-  
-  .time-btn:hover {
-    border: none;
-    background-color: #0397AB;
-    box-shadow: 0 0 10px 5px rgba(3, 151, 171, 0.5);
-  }
-  
-  .vs {
-    margin: 8px;
-    font-size: 16px;
-    font-weight: 700;
-  }
-  .bet__win-percentage{
-    color: #F7F7F7;
-    font-size: 16px;
-    font-weight: 300;
-  }
-  @media (max-width: 960px) {
-    .bet-card {
-      width: calc(50% - 20px);
-    }
-  }
-  
-  @media (max-width: 560px) {
-    .main-section {
-      padding-top: 200px;
-      font-size: 16px;
-    }
+    align-items: stretch;
+    background: #21272B;
+    border-radius: 7.55255px;
+    flex-direction: column;
+    margin:10px;
+}
 
-  
-    .bet-card {
-      width: 100%;
-      margin-right: 0;
-    }
-  
-  
-    .bet__type,
-    .bet__league,
-    .odd,
-    .vs {
-      font-size: 18px;
-    }
-  
-    .bet-options,
-    .bet-info {
-      width: 100%;
-      text-align: center;
-    }
-  
-    .bet-card:nth-child(2n) {
-      margin-right: 0;
-    }
-  }
-  
+#team-bet-modal{
+    margin:10px
+}
+
+.bet__form{
+    margin-top: 10px;
+    display: flex;
+}
+
+.amount {
+    max-width: 70px;
+    font-size: 15px;
+}
+.earning {
+    max-width: 30px;
+    font-size: 15px;
+}
+
+.image-size{
+    margin: 12px;
+    display: block;
+}
+
+.bet-modal-green{
+font-family: 'Inter';
+font-style: normal;
+font-weight: 700;
+font-size: 15px;
+color: #32FF46;
+text-transform: none;
+}
+
+.bet-data{
+    overflow: hidden;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+

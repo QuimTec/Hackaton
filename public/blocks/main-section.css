@@ -33,86 +33,10 @@
   width: 12px;
 }
 
-  .bet-card {
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
-    padding: 15px;
-    margin-bottom: 20px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .bet-info {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin: 0;
-    align-items: center;
-  }
-  .bet__type {
-    font-size: 20px;
-    font-weight: 700;
-    color: #0397AB;
-    margin: 0;
-    margin-bottom: 8px;
-}
-.bet__win-percentage, 
-.bet__wins,
-.bet__total-games,
-.bet__league  {
-  color: #EAF4F6;
-    font-size: 16px;
-    font-weight: 300;
-    margin: 0;
-}
-  .bet-options {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    margin-top: 10px; /* Adicionado margem para melhor espaçamento */
-  }
-  
-  .time-btn {
-    background-color: transparent;
-    border: 1px solid white;
-    border-radius: 10px;
-    cursor: pointer;
-    padding: 10px 20px;
-    display: flex;
-    align-items: center;
-    color:  #0397AB;
-    font-size: 20px;
-    font-family: Inter;
-    font-weight: 700;
-    box-sizing: border-box;
-  }
-  .time-btn:hover {
-    background-color: #0397AB;
-  }
-  
-  .vs {
-    margin: 0;
-    font-size: 24px;
-    font-weight: 700;
-  }
 
 @media (max-width: 560px) {
   .main-section {
     padding-top: 200px;
     font-size: 16px;
-  }
-
-  .bet__type,
-  .bet__league,
-  .odd,
-  .vs {
-    font-size: 18px;
-  }
-
-  .bet-options,
-  .bet-info {
-    width: 100%;
-    text-align: center;
-  }
+  } 
 }

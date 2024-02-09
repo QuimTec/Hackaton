@@ -14,7 +14,7 @@
           <img src="./images/Logo__GlascBet.png" alt="Logo GlascBet" />
         </div>
         <div class="nav-elements">
-          <button class="button__money" id="moneyBtn">R$ <span id="wallet"></span></button>
+          <button class="button__money" id="moneyBtn">R$ <span id="wallet-value"></span></button>
           <button class="button__profile" id="profileBtn">
             <img src="./images/UserImage.png" alt="Perfil" />
           </button>
@@ -32,11 +32,16 @@
 
     </div> 
 
+  
       <!-- Modal de Login/Register -->
       <div id="modal" class="modal">
         <div class="modal-content">
-          <div id="register-form" class="modal-form">
-            <h2 class="modal-title">Registre-se</h2>
+          <img class="image-align" src="./images/login-logo.svg" alt="Logo">
+          <div class="modal-title">
+            <button class="modal-button" data-page="register-form" onclick="switchPage('register-form')">Registre-se</button>        
+            <button class="modal-button" data-page="login-form" onclick="switchPage('login-form')">Login</button>
+          </div>
+          <div id="register-form" class="modal-form">                              
             <input
               type="text"
               id="firstName"
@@ -89,7 +94,6 @@
           </div>
 
           <div id="login-form" class="modal-form">
-            <h2 class="modal-title">Login</h2>
             <input
               type="email"
               id="loginEmail"
@@ -106,47 +110,74 @@
             />
 
             <button class="button" onclick="performLogin()">Entrar</button>
-          </div>
+          </div>        
+
+          
         </div>
       </div>
 
       <!-- Modal de Bet -->
-      <div id="modalBet" class="modal modal_bet">
-        <div class="modal-content">
+      <div id="modalBet" class="modal">
+        <div class="modal-content bet-modal">
           <span class="close">&times;</span>
           <h2 class="modal-title">Bet</h2>
-          <p class="bet__type"></p>
-          <p class="bet__league"></p>
+          <div class="modal-bet-content bet-data">
+            <section id="bet-mod-margin">
+              <p id="bet__type">Vencedor da Partida</p>
+              <p id="bet__league"></p>             
+            </section>
+            <section id="bet-mod-margin">              
+              <div style="display: flex; align-items: center;">
+                <img id="team-bet-modal" src="./images/Ellipse 347.svg" alt="Team logo">
+                <p id="teamname"></p>
+              </div> 
+              <p id="winPercentage">
+              </p>
+            </section>
+          </div>
           <form class="bet__form">
-            <label for="amount">Value da Aposta</label>
-            <div >
-              <span class="currency-symbol">R$</span>
-              <input type="number" class="amount" id="amount" placeholder="Digite o valor" max="10000" required>
+            <div class="modal-bet-content bet-data">
+              <section id="bet-mod-margin"> 
+                <img id="team-bet-modal" src="./images/Money-icon.svg" alt="Team logo">
+                <input type="number" class="amount" id="amount" placeholder="Bet Value" max="10000" required> 
+              </section>
             </div>
-            <label for="earning">Earnings</label>
-            <div >
-              <span>$</span>
-              <input type="number" class="earning" id="earning" readonly />
-            </div>
+            
+            <div class="modal-bet-content bet-data">         
+              <section id="bet-mod-margin">  
+                <p class="bet-modal-green">Earnings</p>
+                <img id="team-bet-modal" src="./images/Money-icon.svg" alt="Team logo">
+                <input type="number" class="amount" id="earning" readonly />
+              </section>
+            </div>            
           </form>
-          <div class="buttons">
-            <button class="button" id="confirmarBet">
-              Confirmar Bet
+          <div class="modal-bet-content bet-data">
+            <section id="bet-mod-margin">
+              <p id="bet__type">Your Total Money</p>
+              <p class="button__money" id="moneyBtn">$ <span id="wallet-bet"></span></p>            
+            </section>
+          </div>
+          <div class="modal-bet-content bet-data">
+            <section id="bet-mod-margin">
+              <p id="bet__type">Your Bet Value</p>
+              <p class="button__money" id="moneyBtn">$ <span id="bet-value"></span></p>            
+            </section>
+          </div>
+          <div class="button">
+            <button id="confirmarBet">
+              Confirm Bet
             </button>
           </div>
+          
         </div>
       </div>
 
       <!-- Modal do Usuário -->
-      <div id="modalUser" class="modal modal_user">
-        <div class="modal-content modal-content-user">
+      <div id="modalUser" class="modal">
+        <div class="modal-content">
           <span class="close close_user">&times;</span>
-          <img
-            src="./images/UserImage.png"
-            alt="Foto do usuário"
-            class="userImage"
-          />
-          <form class="user__form">
+          <img class="userImage image-align" src="./images/UserImage.png" alt="Foto do usuário"/>
+          <form class="modal-form input">
             <div>Username</div>
             <input
               type="text"
@@ -195,12 +226,10 @@
               <option value="Yasuo">Emissários da Luz - Yasuo</option>
               <option value="Riven">Emissários da Luz - Riven</option>
             </datalist>
+            <button class="button button__deposit">Deposit</button>
+            <button class="button button__retirar">Cash Out $</button>
+            <button class="button button__solicitar" disabled>Solicitar Skin</button>
           </form>
-          <button class="button button__deposit">Deposit</button>
-          <button class="button button__retirar">Cash Out $</button>
-          <button class="button button__solicitar" disabled>
-            Solicitar Skin
-          </button>
           <p class="aviso">
             Request a skin from min. 500 points (Max. 5000)
           </p>
@@ -211,7 +240,7 @@
       <div id="depositModal" class="modal_deposito">
         <div class="modal-deposit-content">
           <span class="close" id="closeModalBtn">&times;</span>
-          <h2>Deposit</h2>
+          <h2 class="modal-title">Deposit</h2>
           <form id="depositForm">
             <label for="depositAmount">Value:</label>
             <input type="text" id="depositAmount" name="depositAmount" required>
@@ -221,7 +250,7 @@
               <option value="creditCard">Credit Card</option>
             </select>
 
-            <button type="button" id="confirmDepositBtn">
+            <button type="button" class="button" id="confirmDepositBtn">
               Confirm Deposit
             </button>
           </form>

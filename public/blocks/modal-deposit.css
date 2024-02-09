@@ -7,7 +7,7 @@
   background-color: rgba(0, 0, 0, 0.7);
 }
 
-.depositForm{
+#depositForm{
   display: grid;
   grid-column: 1;
   gap: 15px;

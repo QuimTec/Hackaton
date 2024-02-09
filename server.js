@@ -8,7 +8,12 @@ const jwt = require('jsonwebtoken');
 var cookieParser = require('cookie-parser');
 
 
+const swaggerUi = require('swagger-ui-express')
+const swaggerFile = require('./swagger-output.json')
+
 app.use(express.json());
+
+app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 
 app.use(cookieParser());
 
@@ -16,10 +21,11 @@ app.use(express.static('public'));
 
 //Chamada pag inicial
 app.get("/", function (require, response) {
+    /*  #swagger.tags = ['User']
+    #swagger.description = 'Endpoint get the specific user.' */
     response.sendFile(__dirname + "/public/index.html");
 });
 
-//Criar users
 app.post("/user", function (require, response) {
     var obj = require.body;
     db.addUser(obj, function (error) {
@@ -149,14 +155,12 @@ app.post("/bet", function (req, res) {
         if (error) {
             return res.status(500).json(error);
         }
-        // Subtrair o betAmount da bet do wallet do usuário
-        var betAmountBet = obj.betAmount;
-        db.wallet(id_user, function (error, results) {
+        db.wallet(id_user, function (error, rows) {
             if (error) {
                 return res.status(500).json(error);
             }
             var walletValue = rows[0].wallet;
-            var newWalletValue = walletValue + add.betAmount;
+            var newWalletValue = walletValue - obj.betAmount;
             db.updateWallet({ id_user: id_user, wallet: newWalletValue }, function (error) {
                 if (error) {
                     return res.status(500).json(error);
@@ -203,17 +207,23 @@ app.put("/encerrarBet", function (req, res) {
                     }
                     var walletValue = walletResults[0].wallet;
                     var newWalletValue = walletValue + betAmountEarning;
+                    console.log(1);
                     // Atualizar o wallet no banco de dados
                     db.updateWallet({ id_user: id_user, wallet: newWalletValue }, function (error) {
                         if (error) {
+                            console.log("erro");
                             return console.error(error);
                         }
-                        res.writeHead(200, { "Content-Type": "application/json" });
-                        res.end('{ "msg": "Bets encerradas com sucesso" }');
                     })
                 })
             })
-        }
+        } 
+            console.log(2);
+            res.writeHead(200, { "Content-Type": "application/json" });
+            console.log(3);
+            res.end('{ "msg": "Bets encerradas com sucesso" }');
+            console.log(4);               
+        
     })
 });
 

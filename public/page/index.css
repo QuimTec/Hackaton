@@ -2,6 +2,7 @@
 @import url(../styles/inter.css);
 @import url(../blocks/navbar.css);
 @import url(../blocks/main-section.css);
+@import url(../blocks/bets-card.css);
 @import url(../blocks/modal.css);
 @import url(../blocks/modal-bet.css);
 @import url(../blocks/modal-user.css);
@@ -15,11 +16,4 @@
     min-height: 100vh;
 }
 
-
-
-  .bet-options {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;               
-  }
 

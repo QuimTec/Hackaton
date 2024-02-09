@@ -92,18 +92,45 @@ export default class LoginModal {
         passworld: password,
         dateOfBirth: dob
     };
-var minhaRequisicao = new Request("/user");
-fetch(minhaRequisicao,{
-method: "POST",
-headers:{
-  Accept: "application/json",
-  "Content-Type" : "application/json"
-},
-body: JSON.stringify(user)
-}).then(response => response.text()).then(responseText => {
-alert("Resposta do back-end: " + responseText);
-})        
-}
+      var minhaRequisicao = new Request("/user");
+      fetch(minhaRequisicao,{
+      method: "POST",
+      headers:{
+        Accept: "application/json",
+        "Content-Type" : "application/json"
+    },
+      body: JSON.stringify(user)
+      }).then(response => response.text()).then(responseText => {
+      alert("Resposta do back-end: " + responseText);
+      })        
+  }
+
+  switchPage(page) {    
+    const pages = ['register-form', 'login-form'];
+  
+    pages.forEach(pageId => {
+      const pageElement = document.getElementById(pageId);
+      if (pageElement) {
+        pageElement.style.display = 'none';
+      }
+    });
+  
+    const selectedPage = document.getElementById(page);
+    if (selectedPage) {
+      selectedPage.style.display = 'grid';
+    }
+  
+    const buttons = document.querySelectorAll('.modal-button');
+    buttons.forEach(button => {
+      button.classList.remove('selected');
+    });
+  
+    const clickedButton = document.querySelector(`.modal-button[data-page="${page}"]`);
+    if (clickedButton) {
+      clickedButton.classList.add('selected');
+    }
+  }
+  
 
   addEventListeners() {
     document.querySelector('.close').addEventListener('click', () => {
@@ -118,7 +145,10 @@ alert("Resposta do back-end: " + responseText);
 
     window.performLogin = this.performLogin.bind(this);
     window.register = this.register.bind(this);
+    window.switchPage = this.switchPage.bind(this);
   }
+
+  
 }
 
 

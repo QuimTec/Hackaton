@@ -7,7 +7,6 @@ export default class BetModal {
       this.confirmBetButton = this.modal.querySelector('#confirmarBet');
       this.amountInput = this.modal.querySelector('#amount');
       this.earningInput = this.modal.querySelector('#earning');
-      
       this.api = new Api();
 
       this.teamname = null;
@@ -23,6 +22,7 @@ export default class BetModal {
       this.confirmBetButton.addEventListener('click', () => this.confirmBet());
 
       this.amountInput.addEventListener('input', () => this.calculateEarning());
+      
 
     }
   
@@ -36,7 +36,10 @@ export default class BetModal {
       this.earningInput.value = "";
       this.amountInput.value = ""; // Limpar o betAmount do campo de entrada de amount
       this.modal.style.display = 'flex';
-      
+      document.getElementById("bet__league").innerText = league;
+      document.getElementById("teamname").innerText = teamname;
+      document.getElementById("winPercentage").innerText = parseFloat(winPercentage).toFixed(2);
+      document.getElementById("wallet-bet").innerText = document.getElementById("wallet-value").innerText.match(/\d+(\.\d{1,2})?/)[0];;
 
   }
   
@@ -72,6 +75,8 @@ export default class BetModal {
       const amount = parseFloat(this.amountInput.value);
       const earning = amount * odd || 0;
       this.earningInput.value = earning.toFixed(2);
+      
+      document.getElementById("bet-value").innerText = this.amountInput.value;
   }
 }
   
