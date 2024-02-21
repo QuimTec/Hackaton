@@ -51,7 +51,6 @@ export default class LoginModal {
       email: email,
       passworld: passworld
   };
-  console.log("enviado :"+login);
   var minhaRequisicao = new Request("/login");
   fetch(minhaRequisicao,{
     method: "POST",

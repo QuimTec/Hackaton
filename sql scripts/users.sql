@@ -1,4 +1,4 @@
-use dbglbet;
+
 CREATE TABLE users (
 	id_user INT AUTO_INCREMENT PRIMARY KEY,
     firstName VARCHAR(255) NOT NULL,

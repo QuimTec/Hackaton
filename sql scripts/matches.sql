@@ -1,7 +1,6 @@
 /*
   Será atualizada com dados de matches reais
 */
-use dbglbet;
 CREATE TABLE matches (
   id_match INT AUTO_INCREMENT PRIMARY KEY,
   league VARCHAR(50) NOT NULL,

@@ -1,4 +1,4 @@
-use dbglbet;
+
 CREATE TABLE bets (
   id_bet INT AUTO_INCREMENT PRIMARY KEY,
   id_match INT NOT NULL,
