@@ -57,7 +57,6 @@ app.post('/login', (require, response) => {
         const token = jwt.sign({ id }, process.env.SECRET);
         response.cookie('token', token, {
             httpOnly: true,
-            secure: true,
         });
         response.redirect('/index.html');
     });
