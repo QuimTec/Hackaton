@@ -18,12 +18,16 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 
 ### Instruções para rodar o servidor
 
-Alterar o arquivo conexaoBd com os seus dados de
--host
--user
--password
--database
+Criar um arquivo .env, com uma URL e um SECRET
+
+Por exemplo:
+
+    SECRET='mysecret'
+  
+    URL='http://localhost:3000/'
 
 No terminal de comando
+
 npm install
-nodemon servidor.js
+
+npm run dev
