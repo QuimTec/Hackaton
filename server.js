@@ -63,6 +63,11 @@ app.post('/login', (require, response) => {
     });
 });
 
+app.post('/logout', (req, res) => {
+    res.clearCookie('token');
+    res.json({ message: 'Logout successful' });
+});
+
 // Autorização
 function verifyJWT(req, res, next) {
     const token = req.cookies.token;

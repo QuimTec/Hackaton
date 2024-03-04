@@ -99,6 +99,27 @@ export default class Api {
     }
   }
 
+  async logout() {
+    try {
+      var minhaRequisicao = new Request("/logout");
+      const response = await fetch(minhaRequisicao, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.status === 200) {
+        window.location.reload();
+      } else {
+        console.error("Erro ao fazer logout:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Erro na requisição de logout:", error);
+    }
+  }
 }
+
+
   
   
