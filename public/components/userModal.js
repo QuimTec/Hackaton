@@ -1,13 +1,14 @@
-import DepositModal from '../components/depositoModal.js';
+import DepositModal from './depositModal.js';
+
 
 export default class UserModal {
   constructor() {
     this.modal = document.getElementById('modalUser');
     this.profileBtn = document.getElementById('profileBtn');
-    this.depositBtn = document.querySelector('.button__depositar');
+    this.depositBtn = document.querySelector('.button__deposit');
     this.closeButton = document.querySelector('.close_user');
+    this.logOutBtn = document.querySelector('.button__logout');    
     this.depositModal = new DepositModal;
-
     this.setupEventListeners();
   }
 
@@ -18,7 +19,7 @@ export default class UserModal {
 
   async open() {
     this.modal.style.display = 'flex';
-    // Adicione aqui a lógica para carregar os dados do usuário no modal
+
     this.userData = await this.api.getDadosUsuario();
     if (this.userData) {
       this.updateUserModal(this.userData);
@@ -32,38 +33,38 @@ export default class UserModal {
   setupEventListeners() {
     this.profileBtn.addEventListener('click', () => this.open());
     this.closeButton.addEventListener('click', () => this.close());
-    this.depositBtn.addEventListener('click', () => {
+    this.logOutBtn.addEventListener('click', () => this.logOut());
+    this.depositBtn.addEventListener('click', (clickEvent) => {
+      clickEvent.preventDefault();
       this.close();
       this.depositModal.open();
     });
 
-    // Adicionar evento para fechar o modal do usuário ao pressionar a tecla "Esc"
+  
     window.addEventListener('keydown', (event) => {
       if (event.key === 'Escape') {
         this.close();
-        depositModal.close();
+        this.depositModal.close();
       }
     });
   }
 
-   updateUserModal(userData) {
-    // Lógica para carregar dados do usuário no modal
-    // ...
-    console.log(userData);
-    var apelidoInput = document.getElementById('apelido');
+  updateUserModal(userData) {
+
+    var userNameInput = document.getElementById('userName');
     var cpfInput = document.getElementById('cpfModal');
-    var saldoInput = document.getElementById('saldoModal');
-    var pontosInput = document.getElementById('pontos');
-    // ...
-
-    // Simular dados do usuário (substitua com os dados reais do usuário)
+    var walletInput = document.getElementById('walletModal');
+    var pointsInput = document.getElementById('points');
   
-
-    // Preencher os campos do modal do usuário
-    apelidoInput.value = userData.apelido;
+    userNameInput.value = userData.userName;
     cpfInput.value = userData.cpf;
-    saldoInput.value = userData.saldo;
-    pontosInput.value = userData.pontos;
-    // Outros campos do modal podem ser preenchidos da mesma maneira
+    walletInput.value = userData.wallet;
+    pointsInput.value = userData.points;
+   
   }
+
+  async logOut() {
+    this.logOut = await this.api.logout();
+  }
+
 }

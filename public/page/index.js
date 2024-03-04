@@ -1,104 +1,99 @@
 import LoginModal from '../components/loginModal.js';
 import UserModal from '../components/userModal.js';
-import DepositModal from '../components/depositoModal.js';
-import ApostaModal from '../components/apostaModal.js';
+import DepositModal from '../components/depositModal.js';
+import BetModal from '../components/betModal.js';
 import Api from '../components/API.js';
-import { arrayData } from "../components/array-data.js";
+import { arrayData } from "../components/mockMatchData.js";
 
 document.addEventListener('DOMContentLoaded', () => {
-  const loginModal = new LoginModal();
+  const loginModal = new LoginModal();  
   const userModal = new UserModal();
-  const depositModal = new DepositModal();
-  const apostaModal = new ApostaModal();
   const api = new Api();
   const profileBtn = document.getElementById('profileBtn');
   const moneyBtn = document.getElementById('moneyBtn');
-  const apostaBtns = document.querySelectorAll('.time-btn');
+  const betBtns = document.querySelectorAll('.time-btn');
   userModal.setApi(api);
   
   loginModal.checkAndShowModal();
-  
-  api.atualizarSaldo();
+  loginModal.switchPage('login-form');
+  if(loginModal.getCookie('cookiedLogin') != null){
+    api.loadWallet();
+  }
+
  
 
-  apostaBtns.forEach((btn) => {
-    btn.addEventListener('click', (event) => {
+  betBtns.forEach((btn) => {
+    btn.addEventListener('click', (event) => {      
+        const betModal = new BetModal();
         const league = event.currentTarget.dataset.league;
         const teamname = event.currentTarget.dataset.teamname;
         const winPercentage = event.currentTarget.dataset.winPercentage;
         const wins = event.currentTarget.dataset.wins;
-        const totalGames = event.currentTarget.dataset.totalGames;
-        console.log(diaJogo);
-        apostaModal.open(league, teamname, winPercentage, wins, totalGames,diaJogo);
+        const totalGames = event.currentTarget.dataset.totalGames;   
+        betModal.open(league, teamname, winPercentage, wins, totalGames,matchDay);
     });
 });
 
-  profileBtn.addEventListener('click', () => {
+  profileBtn.addEventListener('click', () => {    
       userModal.open();
   });
   
   document.querySelector('.close').addEventListener('click', () => {
     userModal.close();
-    depositModal.close();
-    apostaModal.close();
   });
   
-  document.querySelector('.button__depositar').addEventListener('click', () => {
+  document.querySelector('.button__deposit').addEventListener('click', () => {
       userModal.close();
-      depositModal.open();
   });
   
-  moneyBtn.addEventListener('click', () => {
+  moneyBtn.addEventListener('click', () => {    
+      const depositModal = new DepositModal;
       depositModal.open();
   }); 
 
   window.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
       userModal.close();
-      depositModal.close();
-      apostaModal.close();
     }
   });
 });
 
-function createApostaCard(obj1, obj2,diaJogo) {
+
+function createBetCard(dataTeam1, dataTeam2,matchDay) {
   
-  if (!obj1 || !obj2 || !obj1.teamname || !obj2.teamname) {
+  if (!dataTeam1 || !dataTeam2 || !dataTeam1.teamname || !dataTeam2.teamname) {
     console.error("Objetos ou propriedades indefinidos");
     return ""; // Retorna uma string vazia ou outra mensagem de erro adequada
   }
 
   return `
-    <div class="aposta-card">
+    <div class="bet-card">
     
-      <div class="aposta-info">
-        <p class="aposta__type">Vencedor da Partida</p>
-        
-        <p class="aposta__league">${obj1.league}</p>
-      </div>
-      <p class="aposta__date">${diaJogo}</p>
-      <div class="aposta-options">
-        <button class="time-btn" data-teamname="${obj1.teamname}" data-win-percentage="${obj1.win_percentage}" data-wins="${obj1.wins}" data-total-games="${obj1.total_games}">
-          <div>
-            ${obj1.teamname} <span class="aposta__win-percentage">Odds ${obj1.win_percentage.toFixed(2)}</span>
-          </div>
-        
+        <p class="bet-info bet__type">Vencedor da Partida</p>        
+        <p class="bet-info bet__league">${dataTeam1.league}</p>
+      
+      <div class="bet-options">
+        <button class="time-btn" data-teamname="${dataTeam1.teamname}" data-win-percentage="${dataTeam1.win_percentage}" data-wins="${dataTeam1.wins}" data-total-games="${dataTeam1.total_games}" data-league="${dataTeam1.league}">  
+          <img id="team-logo" src="./images/Ellipse 347.svg" alt="Team logo">      
+          <div id="team-margin">${dataTeam1.teamname}</div>
+          <div>${dataTeam1.win_percentage.toFixed(2)}</div>          
         </button>
+      </div> 
         <div class="vs">   
         VS
         </div>
-        <button class="time-btn" data-teamname="${obj2.teamname}" data-win-percentage="${obj2.win_percentage}" data-wins="${obj2.wins}" data-total-games="${obj2.total_games}">
-          <div>
-            ${obj2.teamname} <span class="aposta__win-percentage">Odds ${obj2.win_percentage.toFixed(2)}</span>
-          </div>
-        
+      <div class="bet-options">
+        <button class="time-btn" data-teamname="${dataTeam2.teamname}" data-win-percentage="${dataTeam2.win_percentage}" data-wins="${dataTeam2.wins}" data-total-games="${dataTeam2.total_games}" data-league="${dataTeam2.league}">       
+        <div>${dataTeam2.win_percentage.toFixed(2)}</div>  
+        <div id="team-margin">${dataTeam2.teamname}</div>             
+        <img id="team-logo" src="./images/Ellipse 347.svg" alt="Team logo">  
         </button>
       </div>
     </div>
   `;
 }
 
-const apostasContainer = document.getElementById('apostas-container');
+const betsContainer = document.getElementById('bets-container');
 
 
 
@@ -108,25 +103,50 @@ Date.prototype.addDays = function(days) {
   return date;
 };
 
-let diaJogo;
+let matchDay;
 
 for (let i = 0; i < arrayData.length; i += 2) {
-  const obj1 = arrayData[i];
-  const obj2 = arrayData[i + 1];
+  const dataTeam1 = arrayData[i];
+  const dataTeam2 = arrayData[i + 1];
 
-  obj1.win_percentage = (parseFloat(obj1.win_percentage) + parseFloat(obj2.win_percentage)) / parseFloat(obj1.win_percentage);
+  dataTeam1.win_percentage = (parseFloat(dataTeam1.win_percentage) + parseFloat(dataTeam2.win_percentage)) / parseFloat(dataTeam1.win_percentage);
   
-  // Definindo diaJogo para obj1
+  // Definindo matchDay para dataTeam1
   const doisDiasDepois = new Date().addDays(2);
-  obj1.diaJogo = doisDiasDepois.toISOString().slice(0, 19).replace("T", " "); // Convertendo para o formato TIMESTAMP
+  dataTeam1.matchDay = doisDiasDepois.toISOString().slice(0, 19).replace("T", " "); // Convertendo para o formato TIMESTAMP
   
-  // Definindo diaJogo para obj2
-  obj2.win_percentage = 4 - parseFloat(obj1.win_percentage);
-  obj2.diaJogo = new Date().toISOString().slice(0, 19).replace("T", " "); // Convertendo para o formato TIMESTAMP
+  // Definindo matchDay para dataTeam2
+  dataTeam2.win_percentage = 4 - parseFloat(dataTeam1.win_percentage);
+  dataTeam2.matchDay = new Date().toISOString().slice(0, 19).replace("T", " "); // Convertendo para o formato TIMESTAMP
 
    // Convertendo para o formato dd-mm-aaaa
-  diaJogo = obj1.diaJogo;
-  const diaJogoDate = new Date(obj1.diaJogo);
-  const diaJogoFormatado = diaJogoDate.toLocaleDateString();
-  apostasContainer.innerHTML += createApostaCard(obj1, obj2, diaJogoFormatado);
+  matchDay = dataTeam1.matchDay;
+  const matchDayDate = new Date(dataTeam1.matchDay);
+  const matchDayFormatado = matchDayDate.toLocaleDateString();
+  betsContainer.innerHTML += createBetCard(dataTeam1, dataTeam2, matchDayFormatado);
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+  const buttons = document.querySelectorAll('.time-btn');
+  let changeColor = false;
+    buttons.forEach((button, index) => {
+      if(index % 2 === 0) {
+        changeColor = !changeColor;
+      }
+      if (index % 2 === 0 && changeColor) {
+        button.classList.add('team1-btn');
+      } 
+      if (index % 2 !== 0 && changeColor) {
+        button.classList.add('team2-btn');
+      }
+      if (index % 2 === 0 && !changeColor) {
+        button.classList.add('team2-btn');
+      } 
+      if (index % 2 !== 0 && !changeColor) {24242
+        button.classList.add('team1-btn');
+        
+      }
+    });  
+});
+
+

@@ -2,10 +2,11 @@
 @import url(../styles/inter.css);
 @import url(../blocks/navbar.css);
 @import url(../blocks/main-section.css);
+@import url(../blocks/bets-card.css);
 @import url(../blocks/modal.css);
-@import url(../blocks/modal-aposta.css);
+@import url(../blocks/modal-bet.css);
 @import url(../blocks/modal-user.css);
-@import url(../blocks/modal-deposito.css);
+@import url(../blocks/modal-deposit.css);
 @import url(../blocks/footer.css);
 
 .page {
@@ -15,11 +16,4 @@
     min-height: 100vh;
 }
 
-
-
-  .aposta-options {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr; /* Define three columns with equal width */
-    align-items: center;                 /* Align VS elements vertically */
-  }
 

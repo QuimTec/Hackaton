@@ -14,7 +14,7 @@
           <img src="./images/Logo__GlascBet.png" alt="Logo GlascBet" />
         </div>
         <div class="nav-elements">
-          <button class="button__money" id="moneyBtn">R$ <span id="saldo"></span></button>
+          <button class="button__money" id="moneyBtn">R$ <span id="wallet-value"></span></button>
           <button class="button__profile" id="profileBtn">
             <img src="./images/UserImage.png" alt="Perfil" />
           </button>
@@ -23,38 +23,44 @@
       <!--main-section-->
      <div class="main-section">
       <!--Title-->
-      <h2 class="main__title">Apostas</h2>
+      <h2 class="main__title">Bets</h2>
       <!--Grid-->
       <!-- Container onde os cards serão adicionados -->
-      <div id="apostas-container" class="apostas">
+      <div id="bets-container" class="bets">
         <!-- Os cards serão adicionados aqui dinamicamente -->
       </div>
 
     </div> 
 
+  
       <!-- Modal de Login/Register -->
       <div id="modal" class="modal">
         <div class="modal-content">
-          <div id="register-form" class="modal-form">
-            <h2 class="modal-title">Registre-se</h2>
+          <span class="close">&times;</span>
+          <img class="image-align" src="./images/login-logo.svg" alt="Logo">
+          <div class="modal-title">
+            <button class="modal-button" data-page="register-form" onclick="switchPage('register-form')">Registre-se</button>        
+            <button class="modal-button" data-page="login-form" onclick="switchPage('login-form')">Login</button>
+          </div>
+          <div id="register-form" class="modal-form">                              
             <input
               type="text"
               id="firstName"
               name="firstName"
-              placeholder="Primeiro nome"
+              placeholder="First Name"
             />
             <input
               type="text"
               id="lastName"
               name="lastName"
-              placeholder="Sobrenome"
+              placeholder="Last Name"
               required
             />
             <input
               type="text"
               id="nickname"
               name="nickname"
-              placeholder="Apelido"
+              placeholder="Username"
               required
             />
             <input
@@ -68,14 +74,14 @@
               type="password"
               id="password"
               name="password"
-              placeholder="Senha"
+              placeholder="Password"
               required
             />
             <input
               type="date"
               id="dob"
               name="dob"
-              placeholder="Data de Nascimento"
+              placeholder="Date of Birth"
               required
             />
             <input
@@ -89,72 +95,96 @@
           </div>
 
           <div id="login-form" class="modal-form">
-            <h2 class="modal-title">Login</h2>
             <input
               type="email"
               id="loginEmail"
               name="loginEmail"
-              placeholder="E-mail cadastrado"
+              placeholder="E-mail"
               required
             />
             <input
               type="password"
               id="loginPassword"
               name="loginPassword"
-              placeholder="Senha"
+              placeholder="Password"
               required
             />
 
             <button class="button" onclick="performLogin()">Entrar</button>
-          </div>
+          </div>        
+
+          
         </div>
       </div>
 
-      <!-- Modal de Aposta -->
-      <div id="modalAposta" class="modal modal_aposta">
-        <div class="modal-content">
+      <!-- Modal de Bet -->
+      <div id="modalBet" class="modal">
+        <div class="modal-content bet-modal">
           <span class="close">&times;</span>
-          <h2 class="modal-title">Apostar</h2>
-          <p class="aposta__type"></p>
-          <p class="aposta__league"></p>
-          <form class="aposta__form">
-            <label for="quantia">Quantia</label>
-            <input
-              type="number"
-              class="quantia"
-              id="quantia"
-              placeholder="Digite a quantia"
-              max="10000"
-              required
-            />
-            <label for="ganho">Ganhos</label>
-            <input type="number" class="ganho" id="ganho" readonly />
-          </form>
-          <div class="buttons">
-            <button class="button" id="confirmarAposta">
-              Confirmar Aposta
-            </button>
-            <button class="button" id="depositar">Depositar Dinheiro</button>
+          <h2 class="modal-title">Bet</h2>
+          <div class="modal-bet-content bet-data">
+            <section id="bet-mod-margin">
+              <p id="bet__type">Vencedor da Partida</p>
+              <p id="bet__league"></p>             
+            </section>
+            <section id="bet-mod-margin">              
+              <div style="display: flex; align-items: center;">
+                <img id="team-bet-modal" src="./images/Ellipse 347.svg" alt="Team logo">
+                <p id="teamname"></p>
+              </div> 
+              <p id="winPercentage">
+              </p>
+            </section>
           </div>
+          <form class="bet__form">
+            <div class="modal-bet-content bet-data">
+              <section id="bet-mod-margin"> 
+                <img id="team-bet-modal" src="./images/Money-icon.svg" alt="Team logo">
+                <input type="number" class="amount" id="amount" placeholder="Bet Value" max="10000" required> 
+              </section>
+            </div>
+            
+            <div class="modal-bet-content bet-data">         
+              <section id="bet-mod-margin">  
+                <p class="bet-modal-green">Earnings</p>
+                <img id="team-bet-modal" src="./images/Money-icon.svg" alt="Team logo">
+                <input type="number" class="amount" id="earning" readonly />
+              </section>
+            </div>            
+          </form>
+          <div class="modal-bet-content bet-data">
+            <section id="bet-mod-margin">
+              <p id="bet__type">Your Total Money</p>
+              <p class="button__money" id="moneyBtn">$ <span id="wallet-bet"></span></p>            
+            </section>
+          </div>
+          <div class="modal-bet-content bet-data">
+            <section id="bet-mod-margin">
+              <p id="bet__type">Your Bet Value</p>
+              <p class="button__money" id="moneyBtn">$ <span id="bet-value"></span></p>            
+            </section>
+          </div>
+          <div class="button">
+            <button id="confirmarBet">
+              Confirm Bet
+            </button>
+          </div>
+          
         </div>
       </div>
 
       <!-- Modal do Usuário -->
-      <div id="modalUser" class="modal modal_user">
+      <div id="modalUser" class="modal">
         <div class="modal-content">
           <span class="close close_user">&times;</span>
-          <img
-            src="./images/UserImage.png"
-            alt="Foto do usuário"
-            class="userImage"
-          />
-          <form class="user__form">
-            <div>Apelido</div>
+          <img class="userImage image-align" src="./images/UserImage.png" alt="Foto do usuário"/>
+          <form class="modal-form input">
+            <div>Username</div>
             <input
               type="text"
-              class="apelido"
-              id="apelido"
-              placeholder="Apelido"
+              class="userName"
+              id="userName"
+              placeholder="Username"
               required
             />
             <div>CPF</div>
@@ -168,24 +198,24 @@
             <div>Saldo (R$)</div>
             <input
               type="number"
-              class="saldo"
-              id="saldoModal"
-              placeholder="Saldo Total"
+              class="wallet"
+              id="walletModal"
+              placeholder="Total Money"
               readonly
             />
             <div>Pontos</div>
             <input
               type="number"
-              class="pontos"
-              id="pontos"
-              placeholder="Total acumulado"
+              class="points"
+              id="points"
+              placeholder="Total"
               readonly
             />
             <input
               type="text"
               class="skins"
               list="skins"
-              placeholder="Escolha sua skin"
+              placeholder="Chose your skin"
             />
             <datalist id="skins">
               <option value="Ahri">Florescer Espiritual - Ahri</option>
@@ -197,37 +227,33 @@
               <option value="Yasuo">Emissários da Luz - Yasuo</option>
               <option value="Riven">Emissários da Luz - Riven</option>
             </datalist>
+            <button class="button button__deposit">Deposit</button>
+            <button class="button button__retirar">Cash Out $</button>
+            <button class="button button__solicitar" disabled>Solicitar Skin</button>
           </form>
-          <button class="button button__depositar">Depositar</button>
-          <button class="button button__retirar">Retirar $</button>
-          <button class="button button__retirar" disabled>
-            Solicitar Skin
-          </button>
           <p class="aviso">
-            
-            Solicite uma skin a partir de 500 pontos acumulados (Max. 5000)
+            Request a skin from min. 500 points (Max. 5000)
           </p>
+          <button class="button button__logout">Log out</button>
         </div>
       </div>
 
       <!--Adicionei o modal depósito *Marina-->
       <div id="depositModal" class="modal_deposito">
-        <div class="modal-content">
+        <div class="modal-deposit-content">
           <span class="close" id="closeModalBtn">&times;</span>
-          <h2>Depositar</h2>
+          <h2 class="modal-title">Deposit</h2>
           <form id="depositForm">
-            <label for="valorDeposito">Valor:</label>
-            <input type="text" id="valorDeposito" name="valorDeposito" required>
+            <label for="depositAmount">Value:</label>
+            <input type="text" id="depositAmount" name="depositAmount" required>
 
-            <label for="paymentMethod">Forma de Pagamento:</label>
+            <label for="paymentMethod">Payment Method:</label>
             <select id="paymentMethod" name="paymentMethod" required>
-              <option value="creditCard">Cartão de Crédito</option>
-              <option value="debitCard">Cartão de Débito</option>
-              <option value="bankTransfer">Transferência Bancária</option>
+              <option value="creditCard">Credit Card</option>
             </select>
 
-            <button type="button" id="confirmDepositBtn">
-              Confirmar Depósito
+            <button type="button" class="button" id="confirmDepositBtn">
+              Confirm Deposit
             </button>
           </form>
         </div>
