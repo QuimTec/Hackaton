@@ -1,5 +1,7 @@
 # GlascBet
-<img src=".public/images/Homepage.png" alt="LogoGlascBet">
+
+![Homepage](https://github.com/QuimTec/Hackaton/assets/93887208/a3163656-80b2-4520-8cf7-d5e8c340a427)
+
 
 Bem-vindo ao repositório do projeto **Glasc Bet**, desenvolvido pelo grupo Quimtec durante o hackathon 3 do Bootcamp da TripleTen. 
 Glasc Bet é um site de apostas online focado em partidas de League of Legends (LoL). Oferece uma plataforma interativa e emocionante para os fãs do jogo colocarem suas apostas em eventos específicos.
