@@ -31,3 +31,20 @@ No terminal de comando
 npm install
 
 npm run dev
+
+### Exemplo de funcionamento
+
+## Registro e Login de usuário:
+![login_registro](https://github.com/QuimTec/Hackaton/assets/93887208/18e9c348-512a-4af7-8b39-a642056a2a9f)
+
+
+## Depositar
+![depostio](https://github.com/QuimTec/Hackaton/assets/93887208/f1320ffb-141b-421f-8f9d-f5cc97f3356a)
+
+
+## Apostar
+![aposta](https://github.com/QuimTec/Hackaton/assets/93887208/334b8de7-faed-4a1f-a2d9-48f296e7783d)
+
+
+
+
